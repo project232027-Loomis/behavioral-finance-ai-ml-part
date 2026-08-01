@@ -36,7 +36,7 @@ behavioral-finance-ai/
 └── tests/           # Unit tests
 ```
 
-### Brnach
+### Branch
 
 - main- production branch
 - develop- combined different  model trained branch

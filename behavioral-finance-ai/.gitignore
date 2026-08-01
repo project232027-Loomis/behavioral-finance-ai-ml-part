@@ -20,14 +20,7 @@ ENV/
 *.ipynb_checkpoints
 
 # ===== ML Models & Artifacts =====
-models/
-*.h5
-*.keras
-*.pkl
-*.joblib
-*.pt
-*.pth
-*.onnx
+
 
 # ===== Data =====
 *.csv
@@ -35,11 +28,7 @@ models/
 *.xlsx
 !data/**/sample_*.csv
 
-# ===== Plots / Outputs =====
-*.png
-*.jpg
-*.jpeg
-!docs/**/*.png
+
 
 # ===== Logs =====
 *.log

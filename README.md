@@ -50,7 +50,7 @@ Synthetic Bank Data → Data Normalization
 | Dashboard | Streamlit / Dash |
 | Core Language | Python 3.10+ |
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 behavioral-finance-ai/
@@ -61,11 +61,9 @@ behavioral-finance-ai/
 │   ├── ssi/         # Smart Stock Investing
 │   ├── sentiment/   # FinBERT pipeline
 │   ├── personas/    # Faker persona generator
-│   ├── database/    # PostgreSQL schema
 │   └── utils/       # Metrics: Sharpe Ratio, Max Drawdown
 ├── models/          # Trained model artifacts
 ├── notebooks/       # Experiment notebooks
-├── dashboard/        # Streamlit/Dash app
 └── tests/           # Unit tests
 ```
 
@@ -87,8 +85,6 @@ source venv/bin/activate      # Windows: venv\Scripts\activate
 
 pip install -r requirements.txt
 ```
-
-### Environment Setup
 
 Create a `.env` file:
 

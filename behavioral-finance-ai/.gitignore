@@ -1,0 +1,75 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+build/
+dist/
+
+# ===== Virtual Environment =====
+venv/
+env/
+ENV/
+.venv/
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ===== ML Models & Artifacts =====
+models/
+*.h5
+*.keras
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.onnx
+
+# ===== Data =====
+*.csv
+*.parquet
+*.xlsx
+!data/**/sample_*.csv
+
+# ===== Plots / Outputs =====
+*.png
+*.jpg
+*.jpeg
+!docs/**/*.png
+
+# ===== Logs =====
+*.log
+logs/
+tensorboard_logs/
+runs/
+venv/
+# ===== Environment / Secrets =====
+.env
+.env.*
+kaggle.json
+*.key
+*.pem
+
+# ===== OS Files =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===== Database =====
+*.sqlite3
+*.db
+
+# ===== Misc =====
+*.tmp
+*.bak
+.cache/

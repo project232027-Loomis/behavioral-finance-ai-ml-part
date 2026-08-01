@@ -18,37 +18,6 @@ The system is validated entirely in a **simulation environment** using synthetic
 3. Mitigate the Disposition Effect and Panic Selling via automated exit signals
 4. Use sentiment analysis to filter market noise and improve stock selection
 
-##  Architecture
-
-```
-Synthetic Bank Data → Data Normalization
-        │
-        ▼
-┌──────────────────────┐        ┌──────────────────────┐
-│  Invisible Savings    │  →→→  │  Smart Stock          │
-│  Engine (ISE)         │       │  Investing (SSI)       │
-│  LSTM + Prophet        │       │  MFWS + XGBoost + NLP  │
-└──────────────────────┘        └──────────────────────┘
-        │                               │
-        ▼                               ▼
-   Safe-to-Save Vault           Automated Entry/Exit Signals
-                                         │
-                                         ▼
-                                  PostgreSQL Audit Trail
-```
-
-##  Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Savings Forecasting | LSTM, FB-Prophet |
-| Stock Scoring | Multi-Factor Weighted Scoring (Trend, Volatility, Volume) |
-| Exit Signal Classification | XGBoost |
-| Sentiment Analysis | FinBERT |
-| Synthetic Data | Python Faker |
-| Database | PostgreSQL |
-| Dashboard | Streamlit / Dash |
-| Core Language | Python 3.10+ |
 
 ##  Project Structure
 

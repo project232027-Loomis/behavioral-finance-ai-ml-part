@@ -36,6 +36,12 @@ behavioral-finance-ai/
 └── tests/           # Unit tests
 ```
 
+### Brnach
+
+- main- production branch
+- develop- combined different  model trained branch
+- feature/ism-lstm - lstm realated model development branch 
+
 ## ⚙️ Getting Started
 
 ### Prerequisites

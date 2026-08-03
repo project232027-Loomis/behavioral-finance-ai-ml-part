@@ -20,7 +20,15 @@ ENV/
 *.ipynb_checkpoints
 
 # ===== ML Models & Artifacts =====
-
+*.pt
+*.pth
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.keras
+models/
+checkpoints/
 
 # ===== Data =====
 *.csv
@@ -28,14 +36,12 @@ ENV/
 *.xlsx
 !data/**/sample_*.csv
 
-
-
 # ===== Logs =====
 *.log
 logs/
 tensorboard_logs/
 runs/
-venv/
+
 # ===== Environment / Secrets =====
 .env
 .env.*

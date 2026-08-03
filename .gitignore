@@ -1,0 +1,70 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+build/
+dist/
+
+# ===== Virtual Environment =====
+venv/
+.venv/
+env/
+ENV/
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ===== ML Models & Artifacts =====
+*.pt
+*.pth
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.keras
+models/*/checkpoints/
+models/*/artifacts/
+
+# ===== Data =====
+*.csv
+*.parquet
+*.xlsx
+!behavioral-finance-ai/data/**/sample_*.csv
+
+# ===== Logs =====
+*.log
+logs/
+tensorboard_logs/
+runs/
+
+# ===== Environment / Secrets =====
+.env
+.env.*
+kaggle.json
+*.key
+*.pem
+
+# ===== OS Files =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===== Database =====
+*.sqlite3
+*.db
+
+# ===== Misc =====
+*.tmp
+*.bak
+.cache/

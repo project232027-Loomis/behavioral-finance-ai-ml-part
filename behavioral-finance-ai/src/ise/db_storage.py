@@ -11,6 +11,7 @@ DB_CONFIG = {
     "port": "5432"
 }
 
+
 def init_db():
     query = """
     CREATE TABLE IF NOT EXISTS micro_savings_logs (

@@ -1,0 +1,111 @@
+# ==============================================================================
+# Behavioral Finance AI — Central Configuration
+# All hyperparameters and paths in one place.
+# Override specific values via environment variables or pass a config dict.
+# ==============================================================================
+
+# ── Paths ──────────────────────────────────────────────────────────────────────
+paths:
+  data_raw:       "data/raw"
+  data_synthetic: "data/synthetic"
+  data_processed: "data/processed"
+  models_ise:     "models/ise"
+  models_ssi:     "models/ssi"
+  logs:           "logs"
+
+# ── Persona Generation ─────────────────────────────────────────────────────────
+personas:
+  num_days: 365          # days of transaction history to generate
+  start_date: "2023-01-01"
+  random_seed: 42
+  output_transactions:   "data/synthetic/transactions.csv"
+  output_daily_summary:  "data/synthetic/daily_summary.csv"
+
+# ── ISE — LSTM ─────────────────────────────────────────────────────────────────
+ise:
+  lstm:
+    lookback: 60              # rolling window in days (requirement: 60–90)
+    max_lookback: 90          # configurable upper bound
+    num_features: 10          # [discretionary, recurring, oneoff, balance_eod,
+                              #  day_sin, day_cos, month_day_sin, month_day_cos,
+                              #  is_weekend, total_debits]
+    units_layer1: 128
+    units_layer2: 64
+    dense_units: 32
+    dropout: 0.2
+    epochs: 50
+    batch_size: 32
+    validation_split: 0.20
+    patience: 10              # EarlyStopping patience
+    loss_weight_spend: 1.0    # regression head weight
+    loss_weight_oneoff: 0.5   # classification head weight
+    model_path:    "models/ise/lstm_spending_model.h5"
+    scaler_path:   "models/ise/feature_scaler.joblib"
+
+  # ── ISE — FB-Prophet ─────────────────────────────────────────────────────────
+  prophet:
+    forecast_periods: 30           # days to forecast ahead
+    forecast_baseline_days: 7      # days used for dynamic buffer baseline
+    uncertainty_samples: 1000
+    weekly_seasonality: true
+    yearly_seasonality: true
+    add_indian_holidays: true
+    model_dir: "models/ise/prophet"  # one .pkl per user
+
+  # ── ISE — Adaptive Threshold ─────────────────────────────────────────────────
+  adaptive_threshold:
+    buffer_days: 7             # days of forward expenditure for Dynamic Buffer
+    safety_factor: 1.20        # 20% safety margin above predicted spend
+    min_tranche: 50            # minimum micro-tranche in ₹
+    max_tranche: 500           # maximum micro-tranche in ₹
+    tranche_ratio: 0.30        # fraction of safe_to_save moved per cycle
+    vault_file: "data/synthetic/virtual_vault.csv"
+
+# ── SSI — Multi-Factor Scoring ────────────────────────────────────────────────
+ssi:
+  scoring:
+    weights:
+      trend:      0.40
+      volatility: 0.30
+      volume:     0.30
+    buy_threshold:  70.0       # composite_score >= 70 → BUY
+    sell_threshold: 40.0       # composite_score <= 40 → SELL
+    rsi_period: 14
+    dma_short: 50
+    dma_long: 200
+    vol_window: 20
+    volume_window: 20
+
+  # ── SSI — XGBoost Exit Signal ─────────────────────────────────────────────
+  xgboost:
+    n_estimators: 300
+    max_depth: 5
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    exit_return_threshold: -0.03   # -3% forward return → exit label = 1
+    exit_window_days: 5            # days ahead to measure forward return
+    test_split: 0.20
+    model_path:  "models/ssi/xgboost_exit_model.joblib"
+    scaler_path: "models/ssi/ssi_feature_scaler.joblib"
+
+# ── Sentiment — FinBERT ───────────────────────────────────────────────────────
+sentiment:
+  model_name: "ProsusAI/finbert"
+  batch_size: 16
+  max_length: 512
+  negative_filter_threshold: 0.60   # stocks with negative_score > 0.60 filtered out
+
+# ── API ───────────────────────────────────────────────────────────────────────
+api:
+  host: "0.0.0.0"
+  port: 8000
+  prefix: "/api/v1"
+  title: "Behavioral Finance AI API"
+  description: "REST API for ISE, SSI, and Sentiment modules — plug into any web application"
+  version: "1.0.0"
+  cors_origins:
+    - "http://localhost:3000"    # React dev server
+    - "http://localhost:5173"    # Vite dev server
+    - "http://localhost:8080"    # Vue dev server
+    - "*"                        # set to specific domain in production

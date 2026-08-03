@@ -4,7 +4,7 @@
 
 .PHONY: help install generate-data train-ise train-ssi train-all api test lint clean
 
-PYTHON := python
+PYTHON := $(shell which python3 2>/dev/null || which python 2>/dev/null || echo python3)
 SRC    := src
 DATA   := data/synthetic/daily_summary.csv
 
@@ -56,6 +56,10 @@ test-cov:  ## Run tests with coverage report
 
 simulate:  ## Run full ISE simulation for all personas
 	$(PYTHON) -m src.ise.ise_engine
+
+report:  ## Generate training & evaluation visual report (HTML + plots)
+	$(PYTHON) -m src.reporting.generate_report
+	@echo "Report saved to reports/summary/model_card.html"
 
 # ── Code Quality ──────────────────────────────────────────────────────────────
 

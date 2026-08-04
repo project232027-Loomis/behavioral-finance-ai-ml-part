@@ -1,0 +1,20 @@
+{
+  "lstm": {
+    "mae": 20.18,
+    "mape": 7.02,
+    "r2": 0.9369,
+    "oneoff_acc": 0.906
+  },
+  "ssi": {
+    "auc": 0.835,
+    "precision": 0.718,
+    "recall": 0.767,
+    "f1": 0.742
+  },
+  "simulation": {
+    "total_saved": 44150.0,
+    "avg_tranche": 182.43801652892563,
+    "days_saved": 242
+  },
+  "generated_at": "2026-08-03 22:11:37"
+}
